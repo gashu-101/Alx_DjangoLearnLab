@@ -1,0 +1,1 @@
+journey with Django REST Framework by setting up a new Django project from scratch, specifically for building APIs. This task will introduce you to the initial steps necessary to integrate DRF and prepare for creating API endpoints.
