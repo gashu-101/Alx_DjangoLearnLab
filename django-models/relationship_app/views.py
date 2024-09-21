@@ -5,12 +5,12 @@ from .models import Book, Library
 # Function-Based View to List All Books
 def list_books(request):
     books = Book.objects.all()  # Retrieve all books from the database
-    return render(request, 'list_books.html', {'books': books})  # Render template with books
+    return render(request, 'relationship_app/list_books.html', {'books': books})  # Render template with books
 
 # Class-Based View to Display Details of a Specific Library
 class LibraryDetailView(DetailView):
     model = Library  # Specify the model
-    template_name = 'library_detail.html'  # Template to use
+    template_name = 'relationship_app/library_detail.html'  # Template to use
     context_object_name = 'library'  # Context variable for the template
 
     def get_context_data(self, **kwargs):
