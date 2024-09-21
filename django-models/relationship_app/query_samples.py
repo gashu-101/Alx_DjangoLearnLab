@@ -6,9 +6,9 @@ from .models import *
 books_by_author = Book.objects.filter(author__name='Gashu')
 print(books_by_author)
 
-# Get all books in a specific library
+# Get all books in a specific library (corrected get method)
 library_name = "Some Library Name"  # Define your library name here
-books_in_library = Library.objects.get(library_name).books.all()
+books_in_library = Library.objects.get(name=library_name).books.all()  # Fixed the get method
 print(books_in_library)
 
 # List all librarians
