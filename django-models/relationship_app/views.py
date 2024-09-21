@@ -1,19 +1,19 @@
 from django.shortcuts import render
-from django.views import View
-from django.shortcuts import get_object_or_404
-from .models import Library, Book
+from django.views.generic import DetailView
+from .models import Book, Library
 
-
-# Function-based view to list all books
+# Function-Based View to List All Books
 def list_books(request):
-    books = Book.objects.all()  # Retrieve all books
+    books = Book.objects.all()  # Retrieve all books from the database
     return render(request, 'list_books.html', {'books': books})  # Render template with books
 
+# Class-Based View to Display Details of a Specific Library
+class LibraryDetailView(DetailView):
+    model = Library  # Specify the model
+    template_name = 'library_detail.html'  # Template to use
+    context_object_name = 'library'  # Context variable for the template
 
-
-# Class-based view to display details of a specific library
-class LibraryDetailView(View):
-    def get(self, request, library_name):
-        library = get_object_or_404(Library, name=library_name)  # Retrieve the library
-        books = library.books.all()  # Get all books in the library
-        return render(request, 'library_detail.html', {'library': library, 'books': books})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['books'] = self.object.books.all()  # Add all books in the library to the context
+        return context
