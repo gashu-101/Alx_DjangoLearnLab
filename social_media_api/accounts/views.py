@@ -1,7 +1,7 @@
 from rest_framework import status, generics
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import IsAuthenticated, permissions
 from django.contrib.auth import get_user_model  # Use get_user_model for compatibility with custom user models
 from .serializers import UserSerializer
 
@@ -10,7 +10,7 @@ CustomUser = get_user_model()
 
 # Use generics.GenericAPIView for both follow and unfollow
 class FollowUserView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = CustomUser.objects.all()  # Reference to CustomUser model
 
     def post(self, request, user_id):
