@@ -1,5 +1,5 @@
 from rest_framework import status, generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import permissions
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from .models import Post, Like
@@ -7,7 +7,7 @@ from notifications.models import Notification
 from django.contrib.contenttypes.models import ContentType
 
 class LikePostView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
