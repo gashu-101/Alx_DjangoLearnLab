@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True)
     password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
-    bio = serializers.CharField(required=False)
+    bio = serializers.CharField()
     profile_picture = serializers.ImageField(required=False)
 
     class Meta:
