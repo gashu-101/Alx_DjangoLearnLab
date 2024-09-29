@@ -2,17 +2,19 @@ from rest_framework import status, generics
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
-from .models import User  # Ensure User is your custom user model
+from django.contrib.auth import get_user_model  # Use get_user_model for compatibility with custom user models
 from .serializers import UserSerializer
 
-# Use generics.GenericAPIView for both follow and unfollow
+# Get the custom user model
+CustomUser = get_user_model()
 
+# Use generics.GenericAPIView for both follow and unfollow
 class FollowUserView(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = User.objects.all()  # Assuming User is your CustomUser model
+    queryset = CustomUser.objects.all()  # Reference to CustomUser model
 
     def post(self, request, user_id):
-        user_to_follow = get_object_or_404(User, id=user_id)
+        user_to_follow = get_object_or_404(CustomUser, id=user_id)
         if request.user == user_to_follow:
             return Response({'detail': "You cannot follow yourself."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -22,10 +24,10 @@ class FollowUserView(generics.GenericAPIView):
 
 class UnfollowUserView(generics.GenericAPIView):
     permission_classes = [IsAuthenticated]
-    queryset = User.objects.all()
+    queryset = CustomUser.objects.all()
 
     def post(self, request, user_id):
-        user_to_unfollow = get_object_or_404(User, id=user_id)
+        user_to_unfollow = get_object_or_404(CustomUser, id=user_id)
         if request.user == user_to_unfollow:
             return Response({'detail': "You cannot unfollow yourself."}, status=status.HTTP_400_BAD_REQUEST)
 
