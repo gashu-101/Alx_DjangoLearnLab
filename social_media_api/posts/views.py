@@ -1,11 +1,11 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import  permissions
 from .models import Post
 from .serializers import PostSerializer
 
 class FeedView(generics.ListAPIView):
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
