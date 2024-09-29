@@ -10,7 +10,8 @@ class LikePostView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, post_id):
-        post = get_object_or_404(Post, id=post_id)
+   
+        post = generics.get_object_or_404(Post,pk=pk id=post_id)
         if Like.objects.filter(user=request.user, post=post).exists():
             return Response({"detail": "You have already liked this post."}, status=status.HTTP_400_BAD_REQUEST)
 
