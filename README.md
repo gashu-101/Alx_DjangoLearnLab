@@ -12,7 +12,7 @@ This repository contains the tasks and projects completed as part of the **ALX B
 - **Python & Django Framework**: Core syntax, models, views, and ORM in Django
 - **RESTful APIs**: Building APIs using Django REST Framework
 - **Database Management**: SQL (MySQL) and NoSQL (MongoDB)
-- **Deployment**: Hosting and deploying Django applications
+- **Deployment**: Hosting and deploying Django application
 
 ## 🚀 Repository Structure
 
